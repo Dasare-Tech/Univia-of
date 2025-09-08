@@ -1,0 +1,62 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+
+  <main class="dashboard-main">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h1>Cadastro de Motoristas</h1>
+      <button class="add-btn" (click)="onSubmit()">Adicionar Motorista</button>
+    </header>
+
+    <!-- Formulário -->
+    <section class="form-box">
+      <form [formGroup]="driverForm" class="form-grid">
+        <input type="text" formControlName="nome" placeholder="Nome" />
+        <input type="text" formControlName="documento" placeholder="Documento" />
+        <input type="text" formControlName="veiculo" placeholder="Veículo" />
+        <input type="text" formControlName="contato" placeholder="Contato" />
+        <input type="text" formControlName="cnh" placeholder="CNH" />
+        <select formControlName="disponibilidade">
+          <option value="Disponível">Disponível</option>
+          <option value="Em frete">Em frete</option>
+          <option value="Inativo">Inativo</option>
+        </select>
+        <input type="text" formControlName="endereco" placeholder="Endereço" />
+        <input type="text" formControlName="contaBancaria" placeholder="Conta Bancária" />
+      </form>
+    </section>
+
+    <!-- Lista de Motoristas -->
+    <section class="dashboard-box">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Veículo</th>
+            <th>Disponibilidade</th>
+            <th>Endereço</th>
+            <th>Conta Bancária</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let driver of drivers; let i = index">
+            <td>{{ driver.nome }}</td>
+            <td>{{ driver.veiculo }}</td>
+            <td>
+              <span class="status" [ngClass]="driver.disponibilidade | lowercase | replace:' ':'-'">
+                {{ driver.disponibilidade }}
+              </span>
+            </td>
+            <td>{{ driver.endereco }}</td>
+            <td>{{ driver.contaBancaria }}</td>
+            <td>
+              <button class="edit-btn" (click)="editDriver(i)">Editar</button>
+              <button class="delete-btn" (click)="deleteDriver(i)">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>

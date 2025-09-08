@@ -1,0 +1,78 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+
+  <main class="dashboard-main">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h1>Cadastro de Fretes</h1>
+      <button class="add-btn" (click)="onSubmit()">Salvar Frete</button>
+    </header>
+
+    <!-- Formulário -->
+    <section class="form-box">
+      <form [formGroup]="freteForm" class="form-grid">
+        <input type="text" formControlName="origem" placeholder="Origem" />
+        <input type="text" formControlName="destino" placeholder="Destino" />
+
+        <select formControlName="motorista">
+          <option value="" disabled selected>Selecione o motorista</option>
+          <option *ngFor="let m of motoristas" [value]="m">{{ m }}</option>
+        </select>
+
+        <select formControlName="veiculo">
+          <option value="" disabled selected>Selecione o veículo</option>
+          <option *ngFor="let v of veiculos" [value]="v">{{ v }}</option>
+        </select>
+
+        <select formControlName="cliente">
+          <option value="" disabled selected>Selecione o Cliente</option>
+          <option *ngFor="let c of clientes" [value]="c">{{ c }}</option>
+        </select>
+
+        <input type="date" formControlName="dataSaida" />
+        <input type="date" formControlName="previsaoEntrega" />
+        <select formControlName="status">
+          <option>Em coleta</option>
+          <option>Em trânsito</option>
+          <option>Entregue</option>
+        </select>
+        <input type="number" formControlName="valor" placeholder="Valor do frete" />
+      </form>
+    </section>
+
+    <!-- Lista de Fretes -->
+    <section class="dashboard-box">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Motorista</th>
+            <th>Veículo</th>
+            <th>Status</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let frete of fretes; let i = index">
+            <td>{{ frete.origem }}</td>
+            <td>{{ frete.destino }}</td>
+            <td>{{ frete.motorista }}</td>
+            <td>{{ frete.veiculo }}</td>
+            <td>
+              <span class="status" [ngClass]="frete.status | lowercase | replace:' ':'-'">
+                {{ frete.status }}
+              </span>
+            </td>
+            <td>R$ {{ frete.valor }}</td>
+            <td>
+              <button class="edit-btn" (click)="editFrete(i)">Editar</button>
+              <button class="delete-btn" (click)="deleteFrete(i)">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>

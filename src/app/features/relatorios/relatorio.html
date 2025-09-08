@@ -1,0 +1,137 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+
+  <main class="dashboard-main">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h1>Relatórios da Empresa</h1>
+      <div class="dashboard-actions">
+        <button class="export-btn" (click)="exportPDF()">Exportar PDF</button>
+        <button class="export-btn" (click)="exportExcel()">Exportar Excel</button>
+      </div>
+    </header>
+
+    <!-- Resumo Geral -->
+    <section class="dashboard-cards">
+      <app-card title="Total de Fretes" [value]="150" align="center"></app-card>
+      <app-card title="Receita Total" [value]="'R$ 320.000'" align="center"></app-card>
+      <app-card title="Custos Operacionais" [value]="'R$ 120.000'" align="center"></app-card>
+      <app-card title="Lucro Líquido" [value]="'R$ 200.000'" align="center"></app-card>
+    </section>
+
+    <!-- Gráficos -->
+    <section class="dashboard-content">
+      <app-chart #statusChart title="Fretes por Status" [chartType]="'bar'" [chartData]="fretesStatusData" [chartOptions]="fretesStatusOptions"></app-chart>
+      <app-chart #receitaChart title="Receita Mensal" [chartType]="'line'" [chartData]="receitaMensalData" [chartOptions]="chartOptions"></app-chart>
+      <app-chart #custosChart title="Distribuição de Custos" [chartType]="'pie'" [chartData]="custosData" [chartOptions]="custosChartOptions"></app-chart>
+    </section>
+
+    <!-- Ranking de Vendedores -->
+    <section class="dashboard-box">
+      <div class="box-header"><h2>Ranking de Vendedores</h2></div>
+      <div class="box-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Vendedor</th>
+              <th>Vendas</th>
+              <th>Receita</th>
+              <th>Meta %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let vendedor of ranking">
+              <td>{{ vendedor.nome }}</td>
+              <td>{{ vendedor.vendas }}</td>
+              <td>R$ {{ vendedor.receita }}</td>
+              <td>{{ vendedor.meta }}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Detalhamento de Fretes -->
+    <section class="dashboard-box">
+      <div class="box-header"><h2>Detalhamento de Fretes</h2></div>
+      <div class="box-content">
+        <app-table [data]="fretesDetalhados" [columns]="fretesColumns"></app-table>
+      </div>
+    </section>
+
+   <!-- Curva ABC -->
+<section class="abc-section">
+  <div class="section-header">
+    <h2>Curva ABC - Clientes</h2>
+  </div>
+
+  <div class="abc-summary">
+    <!-- Coluna de cards (fixa) -->
+    <div class="abc-cards">
+      <div class="abc-card a">
+        <div class="abc-card-title">Classe A</div>
+        <div class="abc-card-body">
+          <strong>{{ classeAClientes }} clientes</strong>
+          <div class="small">{{ classeAReceita }}% receita</div>
+        </div>
+      </div>
+
+      <div class="abc-card b">
+        <div class="abc-card-title">Classe B</div>
+        <div class="abc-card-body">
+          <strong>{{ classeBClientes }} clientes</strong>
+          <div class="small">{{ classeBReceita }}% receita</div>
+        </div>
+      </div>
+
+      <div class="abc-card c">
+        <div class="abc-card-title">Classe C</div>
+        <div class="abc-card-body">
+          <strong>{{ classeCClientes }} clientes</strong>
+          <div class="small">{{ classeCReceita }}% receita</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coluna do gráfico (flexível) -->
+    <div class="abc-chart">
+      <app-chart
+        #abcChart
+        title="Curva ABC - Receita por Cliente"
+        [chartType]="'bar'"
+        [chartData]="abcChartData"
+        [chartOptions]="fretesStatusOptions">
+      </app-chart>
+    </div>
+  </div>
+
+  <!-- Tabela abaixo (largura total) -->
+  <div class="abc-table-container">
+    <table class="abc-table">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Receita</th>
+          <th>% Receita</th>
+          <th>Acumulado %</th>
+          <th>Classe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of curvaABC">
+          <td>{{ cliente.nome }}</td>
+          <td>{{ cliente.receita | currency:'BRL' }}</td>
+          <td>{{ cliente.percentual }}%</td>
+          <td>{{ cliente.acumulado }}%</td>
+          <td>{{ cliente.classe }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+  </main>
+</div>

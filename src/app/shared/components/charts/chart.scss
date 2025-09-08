@@ -1,0 +1,23 @@
+.chart-container {
+  width: 100%;
+  background-color: #FFF;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #E5E7EB;
+}
+
+.chart-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.chart-body {
+  width: 100%;
+}
+
+.chart-body canvas {
+  width: 100% !important;
+  height: 350px !important; /* altura fixa para parecer igual ao mockup */
+}

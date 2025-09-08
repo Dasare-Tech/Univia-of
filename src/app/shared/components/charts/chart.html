@@ -1,0 +1,10 @@
+    <div class="chart-container">
+      <div class="chart-title">{{ title }}</div>
+      <div class="chart-body">
+        <canvas baseChart
+                [data]="chartData"
+                [options]="chartOptions"
+                [type]="chartType">
+        </canvas>
+      </div>
+    </div>

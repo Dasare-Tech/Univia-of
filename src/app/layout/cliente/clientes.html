@@ -1,0 +1,80 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>Cadastro de Clientes</h1>
+      <button class="primary-btn">Adicionar Cliente</button>
+    </header>
+
+    <!-- Formulário -->
+    <section class="form-section">
+      <form (ngSubmit)="salvarCliente()">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" [(ngModel)]="novoCliente.nome" name="nome" required />
+          </div>
+          <div class="form-group">
+            <label>Documento (CNPJ/CPF)</label>
+            <input type="text" [(ngModel)]="novoCliente.documento" name="documento" required />
+          </div>
+          <div class="form-group">
+            <label>Telefone</label>
+            <input type="text" [(ngModel)]="novoCliente.telefone" name="telefone" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="novoCliente.email" name="email" />
+          </div>
+          <div class="form-group">
+            <label>Endereço</label>
+            <input type="text" [(ngModel)]="novoCliente.endereco" name="endereco" />
+          </div>
+          <div class="form-group">
+            <label>Região</label>
+            <input type="text" [(ngModel)]="novoCliente.regiao" name="regiao" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="primary-btn">Salvar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Tabela -->
+    <section class="dashboard-box">
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Documento</th>
+              <th>Telefone</th>
+              <th>Email</th>
+              <th>Endereço</th>
+              <th>Região</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cliente of clientes; let i = index">
+              <td>{{ cliente.nome }}</td>
+              <td>{{ cliente.documento }}</td>
+              <td>{{ cliente.telefone }}</td>
+              <td>{{ cliente.email }}</td>
+              <td>{{ cliente.endereco }}</td>
+              <td>{{ cliente.regiao }}</td>
+              <td>
+                <button class="edit-btn" (click)="editarCliente(i)">Editar</button>
+                <button class="delete-btn" (click)="excluirCliente(i)">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+

@@ -1,0 +1,60 @@
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns">{{ col.header }}</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of filteredData; let i = index">
+        <td *ngFor="let col of columns">
+          <!-- índice -->
+          <ng-container *ngIf="col.type === 'index'">
+            {{ i + 1 }}
+          </ng-container>
+
+          <!-- status com badge
+          <ng-container *ngIf="col.type === 'status'">
+            <span class="status"
+                  [ngClass]="col.field ? (item[col.field] | lowercase | replace:' ':'-') : ''">
+              {{ col.field ? item[col.field] : '' }}
+            </span>
+          </ng-container> -->
+
+          <!-- botão
+          <ng-container *ngIf="col.type === 'button'">
+            <button class="edit-btn">{{ col.label || 'Ação' }}</button>
+          </ng-container>  -->
+
+          <!-- currency -->
+          <ng-container *ngIf="isCurrencyColumn(col) && col.field; else normal">
+            {{ formatCurrency(item[col.field]) }}
+          </ng-container>
+
+          <!-- default -->
+          <ng-template #normal>
+            {{ col.field ? item[col.field] : '' }}
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+
+    <!-- Totais -->
+    <tfoot *ngIf="showTotals">
+      <tr>
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.field">
+            <!-- mostra total só se for coluna numérica (currency ou detectada) -->
+            <strong *ngIf="isCurrencyColumn(col) && getColumnTotal(col.field) !== 0">
+              Total: {{ formatCurrency(getColumnTotal(col.field)) }}
+            </strong>
+            <strong *ngIf="!isCurrencyColumn(col) && getColumnTotal(col.field) !== 0">
+              Total: {{ getColumnTotal(col.field) }}
+            </strong>
+          </ng-container>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

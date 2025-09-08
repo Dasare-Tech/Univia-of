@@ -1,0 +1,59 @@
+ <div class="dashboard-container">
+      <app-sidebar></app-sidebar>
+      <main class="dashboard-main">
+        <header class="finance-header">
+          <h1>Financeiro</h1>
+          <button class="export-btn">Exportar</button>
+        </header>
+
+        <!-- Resumo financeiro -->
+        <section class="finance-summary">
+          <app-card title="Faturamento" value="R$ 25.000" align="left"></app-card>
+          <app-card title="Custos" value="R$ 18.500" align="left"></app-card>
+          <app-card title="Lucro líquido" value="R$ 6.500" align="left"></app-card>
+        </section>
+
+        <!-- Gráficos -->
+        <section class="finance-charts">
+          <app-chart title="Fretes por mês"
+                     [chartType]="'line'"
+                     [chartData]="fretesMesData"
+                     [chartOptions]="defaultOptions"></app-chart>
+
+          <app-chart title="Tempo médio de entrega"
+                     [chartType]="'doughnut'"
+                     [chartData]="tempoEntregaData"
+                     [chartOptions]="defaultOptions"></app-chart>
+
+          <app-chart title="Receita por motorista"
+                     [chartType]="'bar'"
+                     [chartData]="receitaMotoristaData"
+                     [chartOptions]="defaultOptions"></app-chart>
+
+          <app-chart title="Curva ABC de clientes"
+                     [chartType]="'bar'"
+                     [chartData]="curvaABCData"
+                     [chartOptions]="abcOptions"></app-chart>
+        </section>
+
+        <!-- Tabela de pagamentos -->
+        <h2 class="section-title">Listagem de pagamentos</h2>
+
+        <!-- Campo de filtro -->
+        <div class="table-actions">
+          <input type="text"
+                placeholder="Pesquisar por empresa ou motorista..."
+                [(ngModel)]="filtro"
+                (input)="aplicarFiltro()" />
+        </div>
+
+        <!-- Tabela dinâmica -->
+        <app-table
+          [data]="payments"
+          [columns]="columns"
+          [showTotals]="true"
+          [search]="filtro"
+          [searchFields]="['company','driver','status']">
+        </app-table>
+      </main>
+    </div>

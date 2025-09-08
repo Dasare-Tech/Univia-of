@@ -1,0 +1,55 @@
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+tr:hover td {
+  background-color: #F9FAFB;
+}
+
+
+/* Badge de status */
+.status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status.em-coleta {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.status.em-trânsito {
+  background: #FEF9C3;
+  color: #92400E;
+}
+
+.status.entregue {
+  background: #DCFCE7;
+  color: #166534;
+}

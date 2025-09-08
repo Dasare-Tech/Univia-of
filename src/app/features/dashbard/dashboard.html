@@ -1,0 +1,51 @@
+<div class="dashboard-container">
+  <app-sidebar></app-sidebar>
+
+  <main class="dashboard-main">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h1>Fretes</h1>
+    </header>
+
+    <!-- Cards -->
+    <section class="dashboard-cards">
+      <app-card title="Fretes ativos" [value]="36" align="center"></app-card>
+      <app-card title="Entregas concluídas" [value]="18" align="center"></app-card>
+      <app-card title="Motoristas disponíveis" [value]="4" align="center"></app-card>
+      <app-card title="Receita mensal" [value]="'R$ 12.500'" align="center"></app-card>
+    </section>
+
+    <!-- Fretes em andamento -->
+    <section class="dashboard-box">
+      <div class="box-header">
+        <h2>Fretes em andamento</h2>
+      </div>
+      <div class="box-content">
+        <app-table [data]="tableData" [columns]="tableColumns"></app-table>
+
+        <div class="box-actions">
+          <button class="card-action" routerLink="/novo-frete">
+            <span class="icon">🚚</span> Novo Frete
+          </button>
+          <button class="card-action" routerLink="/motoristas">
+            <span class="icon">👤</span> Adicionar Motorista
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Relatório -->
+    <section class="dashboard-box">
+      <div class="box-header">
+        <h2>Relatório de Vendas</h2>
+      </div>
+      <div class="box-content">
+        <app-chart
+          [chartType]="'bar'"
+          [chartData]="salesChartData"
+          [chartOptions]="chartOptions">
+        </app-chart>
+      </div>
+    </section>
+  </main>
+</div>
