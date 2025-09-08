@@ -1,0 +1,1 @@
+import{A as e}from"./chunk-BTKJ2X2M.js";var n=class i{transform(t,r,p){return t?.split(r).join(p)??""}static \u0275fac=function(r){return new(r||i)};static \u0275pipe=e({name:"replace",type:i,pure:!0})};export{n as a};
